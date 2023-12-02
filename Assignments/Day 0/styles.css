@@ -1,0 +1,62 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.navbar {
+  box-shadow: 2px 1px 2px #eee;
+  display: flex;
+  justify-content: space-between;
+}
+.logo {
+  margin-left: 400px;
+  cursor: pointer;
+  padding-top: 25px;
+}
+.nav-items {
+  display: flex;
+  margin-right: 420px;
+  color: #666;
+  font-family: "Inter", serif;
+  cursor: pointer;
+}
+a {
+  padding: 25px;
+}
+.landing {
+  display: flex;
+  justify-content: center;
+  padding-top: 90px;
+  padding-bottom: 60px;
+}
+.tagline {
+  display: flex;
+  justify-content: center;
+  font-family: "Inter", serif;
+  color: #424242;
+  font-size: 44px;
+  font-weight: 500;
+  padding-bottom: 20px;
+}
+.info {
+  display: flex;
+  justify-content: center;
+  font-family: "Inter", serif;
+  color: #424242;
+  font-size: 20px;
+  font-weight: 400;
+  padding-bottom: 30px;
+}
+.signup {
+  display: flex;
+  justify-content: center;
+}
+.btn {
+  font-size: 20px;
+  background-color: #387ed1;
+  color: #ffffff;
+  margin-top: 25px;
+  padding: 10px 30px;
+  border-radius: 3px;
+  border-color: #387ed1;
+  cursor: pointer;
+}
