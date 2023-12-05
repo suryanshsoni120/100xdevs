@@ -10,17 +10,20 @@ There is no automated test for this one, this is more for you to understand time
 
 function calculateTime(n) {
   // Find the start time.
-  const startTime = new Date();
-  // Run an empty loop for measuring time.
-  for (let i = 0; i < n; i++) {}
+  const startTime = new Date().getTime();
+  // To find the sum.
+  let sum = 0;
+  // Calculate sum from 1 to n.
+  for (let i = 1; i <= n; i++) {
+    sum += i;
+  }
   // Find the end time.
-  const endTime = new Date();
+  const endTime = new Date().getTime();
   // Calculate the time difference between the end time and start time.
   const elapsedTime = (endTime - startTime) / 1000;
   return elapsedTime;
 }
 
-console.log(calculateTime(0));
 console.log(calculateTime(100));
 console.log(calculateTime(100000));
 console.log(calculateTime(1000000000));
