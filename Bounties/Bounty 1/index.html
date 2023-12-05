@@ -1,0 +1,38 @@
+<!-- Add segments/timestamps similar to youtube on this codebase -->
+<!-- In the given codebase, you should be able to specify an array of segments (similar to youtube)
+The player seekbar should get divided into those segments,
+There should be a function (scrollToSegment) that lets the user scroll to the start of that specific segment.
+Display segement titles accordingly for each segment. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.11.7/video-js.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.11.7/video.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/videojs-contrib-eme@3.8.0/dist/videojs-contrib-eme.js"></script>
+    <script src="./script.js" defer></script>
+
+    <title>Test VideJS DRM</title>
+  </head>
+  <body>
+    <div id="vid-showcase">
+      <div id="vid-container">
+        <video id="my-video" class="video-js"></video>
+        <button id="chapter-ctrl-btn" class="btn">Show Chapters</button>
+      </div>
+
+      <div id="chapters-container">
+        <h1>Chapters</h1>
+        <ul id="chapter-titles"></ul>
+      </div>
+    </div>
+  </body>
+</html>
