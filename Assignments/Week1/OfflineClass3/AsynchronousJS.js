@@ -54,7 +54,7 @@ console.log("With setTimeout()");
 // Import the NodeJS module called filesystem to handle file operations.
 const fs = require("fs");
 
-// This module has a function readFile() that take ssome parameters to read a file.
+// This module has a function readFile() that take some parameters to read a file.
 // The first parameter is the path of file location. If the file is in same folder, just mention the name.
 // The second parameter is the encoding of file.
 // The third parameter is a anonymous callback function that will be called once the file has been completely read or an error occurs.
