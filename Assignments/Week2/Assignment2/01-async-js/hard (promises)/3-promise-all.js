@@ -48,8 +48,8 @@ function calculateTime(t1, t2, t3) {
   const start = Date.now();
   // Calling the 3 funtions to get the promises.
   const p1 = wait1(t1);
-  const p2 = wait1(t2);
-  const p3 = wait1(t3);
+  const p2 = wait2(t2);
+  const p3 = wait3(t3);
   // Using the promise.all() api to wait for them to get resolved.
   // It takes an array of the 3 promises as parameter.
   // It returns a promise containing the results of all 3 promises in the form of an array..
