@@ -1,0 +1,91 @@
+<!-- This code demonstrates a sum calculator which takes 2 inputs and outputs the sum. -->
+<!-- For the input, we have 2 input fields of type number where user enters the numbers. -->
+<!-- Next, there's a button which when clicked, should display the sum. -->
+<!-- These 3 fields currently demonstrate a static website because there's no logic involved of finding sum and showing it. -->
+<!-- Static site means there's no change in the content. -->
+<!-- To make it dynamic, some operations need to be done. -->
+<!-- 1. Reading values from the input fields. -->
+<!-- 2. Applying logic to add these values. -->
+<!-- 3. Showing the output value to user on site once button is clicked. -->
+<!-- 4. Each time an input value is changed, the sum should also change. -->
+
+<!-- To apply these dynamic operations on HTML elements, we use DOM(Document Object Model). -->
+<!-- It is a web API provided by the browser. It is not part of JS or ECMASCRIPT. -->
+<!-- DOM represents the HTML document as a tree-like structure. It allows JS to interact with HTML documents. -->
+<!-- The document node is the root of the tree, and it contains child nodes such as the head, body, etc. -->
+<!-- DOM provides a way to access and manipulate its elements using JS. -->
+<!-- JS provides various methods to access DOM elements. Once we have access to DOM elements, we can manipulate them in various ways. -->
+
+<!-- To access elements, we need to provide them class or id. -->
+<!-- Class helps to access multiple elements at once. Using class, we can easily manipulate multiple elements. -->
+<!-- Id works as a unique identifier. Using id, we can only access and manipulate a single element. -->
+
+<!-- For the sum calculator, lets assign ids to each input and put them inside a div. Assign the div a class. -->
+<!-- Here assigning ids to input is better because the input values can be different. So we will have to access them individually. -->
+<!-- Assigning class to div is just to show some operations on the class element. -->
+
+<!-- Create a JS function where we will access the DOM elements and apply logic to find the sum. -->
+<!-- To access any element with a specific id, JS provides .getElementById() method. -->
+<!-- To get the value of the input, use the .value property. The value will be a string to parse it into integer. -->
+<!-- Get the sum by adding both the input values. -->
+<!-- Next, create a div and give an id. This div we will use to show output on site. -->
+<!-- After the sum is calculated, we access the div with its id using .getElementById() method and then inject HTML into it using .innerHTML property. -->
+<!-- This property is to append new contents to an element. -->
+
+<!-- Call the JS function when the button is clicked using the attribute onClick. -->
+
+<!-- The CSS applied is just an operation to showcase the use of class and id. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+  </head>
+  <style>
+    .container {
+      background-color: yellow;
+    }
+    #firstNumber {
+      height: 30px;
+      background-color: aqua;
+    }
+    #secondNumber {
+      height: 30px;
+      background-color: crimson;
+      color: white;
+    }
+    .btn {
+      background-color: green;
+      color: white;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <input id="firstNumber" type="number" placeholder="Enter first number" />
+      <br />
+      <br />
+      <input
+        id="secondNumber"
+        type="number"
+        placeholder="Enter second number"
+      />
+    </div>
+    <br />
+    <br />
+    <button class="btn" onclick="findSum()">Calculate Sum</button>
+    <br />
+    <br />
+    <div id="finalSum"></div>
+  </body>
+  <script>
+    function findSum() {
+      const num1 = document.getElementById("firstNumber").value;
+      const num2 = document.getElementById("secondNumber").value;
+      const sum = parseInt(num1) + parseInt(num2);
+      const element = document.getElementById("finalSum");
+      element.innerHTML = "The sum is " + sum;
+    }
+  </script>
+</html>

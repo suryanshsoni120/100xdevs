@@ -1,0 +1,189 @@
+<!-- We are creating a better Todo application. -->
+<!-- In this application, user can update the todo as well see the older todos also after modification. -->
+<!-- It will have 3 fields: 2 input fields for title, description and a button to add todo. -->
+<!-- User will input the values and once he clicks the button, the todo gets created and appears below. -->
+<!-- The todo formed will be a div comprising of title, description and a button to track if the todo has been done or not. -->
+
+<!-- Flow of the application: -->
+<!-- The user inputs the values and once he clicks the button, the addTodo() function gets triggered. -->
+<!-- The addTodo() reads the input values, creates a todo object and push it into the todos array. -->
+<!-- Next it will call the updateState() function. This function will update the state of the Todo application. -->
+<!-- It keeps track of the newly created todos, modified todos and deleted todos. -->
+<!-- The updateState() function checks the todos array and then create 3 different arrays(added, updated and deleted). -->
+<!-- In the todos array, it picks a todo by its id and compares it with the old state value. -->
+<!-- If the todo didn't existed in old state but exists in current state, then it is a newly created todo. Add this to the added array. -->
+<!-- If the todo existed in old state as well as current state, then it is an updated todo. Add this to the updated array. -->
+<!-- If the todo existed in old state but doesen't exists in current state, then it is a deleted todo. Add this to the deleted array. -->
+<!-- Then it will shift the current state todos to the old todos. -->
+<!-- The allTodos div element will consist of multiple divs referencing to the todos added by the user. -->
+<!-- Each time there is a change of state, there will be change in the todos content in allTodos div. -->
+
+<!-- This is a sort of implementation of virtualDOM used in React. -->
+<!-- For updating the todo and showing it to the user, we used the function updateState(). -->
+<!-- This function in itself used 3 different functions(addTodoToDom, removeTodoFromDom and updateTodoInDom). -->
+<!-- In React, all these functionalities are written inbuilt using optimized algorithms. -->
+<!-- They reflect changes in the application's state efficiently by minimizing the DOM manipulations. -->
+<!-- This improves the performance, leading to faster rendering and smoother interactions. -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      // To give id to each todo formed.
+      let globalId = 1;
+      // To store the todos once they are created by user.
+      let todos = [];
+      // To store the older data of todos once they are updated by the user.
+      let oldTodos = [];
+
+      // Access the div with its id using .getElementById() method. This div will show all the todos to the user.
+      const allTodos = document.getElementById("showTodos");
+
+      // Function to handle the completion of a todo.
+      function markAsDone(todoId) {
+        // Access the todo by its id using.getElementById() method.
+        const todo = document.getElementById(todoId);
+        // The todo will have 3 parts: title, description and button for tracking status.
+        // Set the button value to Done, showing that the todo has been completed.
+        todo.children[2].innerHTML = "Done!";
+      }
+
+      // Function to inject the content into the allTodos div. The values will be extracted from the given todo.
+      function addTodoToDom(todo) {
+        // Create the outermost div element using .createElement() method. Each todo will be a different div element.
+        const todoDiv = document.createElement("div");
+        // Create a div element for the todo title using .createElement() method.
+        const titleDiv = document.createElement("div");
+        // Inject the title value given by the user into the div element using .innerHTML property.
+        titleDiv.innerHTML = todo.title;
+        // Create a div element for the todo description using .createElement() method.
+        const descDiv = document.createElement("div");
+        // Inject the description value given by the user into the div element using .innerHTML property.
+        descDiv.innerHTML = todo.description;
+        // Create a button for tracking the todo completion using .createElement() method.
+        const btnDiv = document.createElement("button");
+        // Set the button value given by the user into the div element using .innerHTML property.
+        // Initially, the todo is not completed. Once the user will click it, the todo will be marked as done.
+        btnDiv.innerHTML = "Mark as done";
+        // Give the attribute to the button for tracking the todo completion using .setAttribute() method.
+        // The tracking status will be done by the markAsDone() function using the todo id.
+        btnDiv.setAttribute("onclick", `markAsDone(${todo.id})`);
+        // Add the title div to the main div of the todo.
+        todoDiv.appendChild(titleDiv);
+        // Add the description div to the main div of the todo.
+        todoDiv.appendChild(descDiv);
+        // Add the button to the main div of the todo.
+        todoDiv.appendChild(btnDiv);
+        // Assign the id given by the user.
+        todoDiv.setAttribute("id", todo.id);
+        // Add the todo div element containing the title, description and the completion button to the allTodos div.
+        allTodos.appendChild(todoDiv);
+      }
+
+      function removeTodoFromDom(todo) {
+        // Find the todo that needs to be removed through its id using .getElementById() method.
+        const delTodo = document.getElementById(todo.id);
+        // Remove it from the allTodos div using .removeChild() method.
+        allTodos.removeChild(delTodo);
+      }
+
+      // Function to figure out differences between the old todo and the new todo.
+      function updateTodoInDom(oldTodo, newTodo) {
+        // Access the todo by its id using.getElementById() method.
+        const todo = document.getElementById(oldTodo.id);
+        // The todo will have 3 parts: title, description and button for tracking status.
+        // Update the title of the old todo with that of the new todo.
+        todo.children[0].innerHTML = newTodo.title;
+        // Update the description of the old todo with that of the new todo.
+        todo.children[1].innerHTML = newTodo.descripton;
+        // Update the button value of the old todo with that of the new todo.
+        todo.children[2].innerHTML = newTodo.completed
+          ? "Mark as done"
+          : "Done";
+      }
+
+      function updateState(newTodos) {
+        // To store the newly created todos.
+        const added = [];
+        // To store the deleted todos.
+        const deleted = [];
+        // To store the updated todos.
+        const updated = [];
+
+        newTodos.forEach((newTodo) => {
+          // Check if the given todo was a part of the olderTodos.
+          // Find through todo id because it will never change.
+          const oldTodo = oldTodos.find((todo) => todo.id == newTodo.id);
+          // If the todo is not present in oldTodos, then it is a newly created todo.
+          // Push it to the added array.
+          if (!oldTodo) {
+            added.push(newTodo);
+          }
+          // If the todo is present in oldTodos, then it is an updated todo.
+          // Either the title or the description or both could have been updated.
+          // Push it to the updated array.
+          else if (
+            oldTodo.title != newTodo.title ||
+            oldTodo.description != newTodo.description
+          ) {
+            updated.push(newTodo);
+          }
+        });
+
+        oldTodos.forEach((oldTodo) => {
+          // Check if the given todo was a part of the newTodos.
+          // Find through todo id because it will never change.
+          const newTodo = newTodos.find((todo) => todo.id == oldTodo.id);
+          // If the todo is not present in newTodos, then it is a deleted todo.
+          // Push it to the deleted array.
+          if (!newTodo) {
+            deleted.push(oldTodo);
+          }
+        });
+
+        // Add the new todos created by the user to the DOM.
+        added.forEach((todo) => {
+          addTodoToDom(todo);
+        });
+        // Update the todos with the changes made by the user in the DOM.
+        updated.forEach((newTodo) => {
+          const oldTodo = oldTodos.find((todo) => todo.id == newTodo.id);
+          updateTodoInDom(oldTodo, newTodo);
+        });
+        // Remove the todos deleted by the user from the DOM.
+        deleted.forEach((todo) => {
+          removeTodoFromDom(todo);
+        });
+        // The newTodos will become oldTodos whenever there is update in state.
+        oldTodos = newTodos;
+      }
+
+      function addTodo() {
+        // Access the input elements using.getElementById() method.
+        // To get the value of the input, use the .value property.
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        // Add the todo to the todos array. Each todo will be given an id.
+        todos.push({
+          title: title,
+          description: description,
+          id: globalId++,
+        });
+        // Update the state of the application.
+        // Check if there's any new todo added or any todo updated or any todo deleted.
+        updateState(todos);
+      }
+    </script>
+  </head>
+
+  <body>
+    <input type="text" id="title" placeholder="Todo title" /> <br /><br />
+    <input type="text" id="description" placeholder="Todo description" />
+    <br /><br />
+    <button onclick="addTodo()">Add todo</button>
+    <br />
+    <br />
+
+    <div id="showTodos"></div>
+  </body>
+</html>

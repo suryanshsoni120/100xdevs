@@ -1,0 +1,137 @@
+<!-- We are creating a basic Todo application. But this time, we will add functionality of updating the todo. -->
+<!-- It will have 3 fields: 2 input fields for title, description and a button to add todo. -->
+<!-- User will input the values and once he clicks the button, the todo gets created and appears below. -->
+<!-- The todo formed will be a div comprising of title, description and a button to track if the todo has been done or not. -->
+
+<!-- Flow of the application: -->
+<!-- The user inputs the values and once he clicks the button, the addTodo() function gets triggered. -->
+<!-- The addTodo() reads the input values, creates a todo object and push it into the todos array. -->
+<!-- Next it will call the updateTodos() function. This function will update the todos array. -->
+<!-- It will first reset the content of the allTodos div having id 'showTodos'. -->
+<!-- Next, it and calls the createTodoBody() function. -->
+<!-- If there were 2 todos before and now the user calls updateTodos() with 5 todos as input, the old 2 todos will get replaced. -->
+<!-- The createTodoBody() injects the allTodos div having id 'showTodos' with the new values along with an id. -->
+<!-- The todo id helps for manipulating the todo completion. -->
+<!-- The todo showed to the user will have a button for tracking completion. Once user clicks the button, markAsDone() gets triggered. -->
+<!-- The markAsDone() grabs the todo by its id and set it as marked. -->
+<!-- The createTodoBody() function returns a div element containg the title, description and a button for the todo completion. -->
+<!-- The addTodo() injects this div element into the allTodos div element. -->
+<!-- So, the allTodos div element will consist of multiple divs referencing to the todos added by the user. -->
+
+<!-- This is a very basic implementation of reconcilers used in frontend frameworks/libraries, specifically React. -->
+<!-- For updating the todo and showing it to the user, we used 2 functions namely createTodoBody() and updateTodos(). -->
+<!-- In React, all these functionalities are written inbuilt using optimized algorithms. -->
+<!-- They reflect changes in the application's state efficiently by minimizing the DOM manipulations. -->
+<!-- This improves the performance, leading to faster rendering and smoother interactions. -->
+<!-- However, once the todos are modified, the user won't be able to see the older todos. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="title" placeholder="Todo title" /> <br /><br />
+    <input type="text" id="description" placeholder="Todo description" />
+    <br /><br />
+    <button onclick="addTodo()">Add todo</button>
+    <br />
+    <br />
+    <div id="showTodos"></div>
+  </body>
+  <script>
+    // To give id to each todo formed.
+    let globalId = 1;
+    // Array to store the todos.
+    let todos = [];
+
+    // Function to handle the completion of a todo.
+    function markAsDone(todoId) {
+      // Access the todo by its id using.getElementById() method.
+      const todo = document.getElementById(todoId);
+      // The todo will have 3 parts: title, description and button for tracking status.
+      // Set the button value to Done, showing that the todo has been completed.
+      todo.children[2].innerHTML = "Done!";
+    }
+
+    // Function to inject the content into the div. The values will be received as arguments.
+    function createTodoBody(title, description, id) {
+      // Create the outermost div element using .createElement() method. Each todo will be a different div element.
+      const todoDiv = document.createElement("div");
+      // Create a div element for the todo title using .createElement() method.
+      const titleDiv = document.createElement("div");
+      // Inject the title value given by the user into the div element using .innerHTML property.
+      titleDiv.innerHTML = title;
+      // Create a div element for the todo description using .createElement() method.
+      const descDiv = document.createElement("div");
+      // Inject the description value given by the user into the div element using .innerHTML property.
+      descDiv.innerHTML = description;
+      // Create a button for tracking the todo completion using .createElement() method.
+      const btnDiv = document.createElement("button");
+      // Set the button value given by the user into the div element using .innerHTML property.
+      // Initially, the todo is not completed. Once the user will click it, the todo will be marked as done.
+      btnDiv.innerHTML = "Mark as done";
+      // Give the attribute to the button for tracking the todo completion using .setAttribute() method.
+      // The tracking status will be done by the markAsDone() function using the todo id.
+      btnDiv.setAttribute("onclick", `markAsDone(${id})`);
+      // Add the title div to the main div of the todo.
+      todoDiv.appendChild(titleDiv);
+      // Add the description div to the main div of the todo.
+      todoDiv.appendChild(descDiv);
+      // Add the button to the main div of the todo.
+      todoDiv.appendChild(btnDiv);
+      // Assign the id given by the user.
+      todoDiv.setAttribute("id", id);
+      // Return the todo div element containing the title, description and the completion button.
+      return todoDiv;
+    }
+
+    // Function to update the todos array. We are given another todos array.
+    // Replace the old todos with the new todos.
+    function updateTodos(newTodos) {
+      // Access the div with its id using .getElementById() method. This div will show the added todo to the user.
+      const allTodos = document.getElementById("showTodos");
+      // Reset the content.
+      allTodos.innerHTML = "";
+      // Iterate through the the new todos array and update the content of old todo with that of new one.
+      for (let i = 0; i < newTodos.length; i++) {
+        // Get the new todos content.
+        const newTitle = newTodos[i].title;
+        const newDescription = newTodos[i].description;
+        // Create the todo body with updated content and show to the user inside the allTodos div element.
+        allTodos.appendChild(
+          createTodoBody(newTitle, newDescription, globalId++)
+        );
+      }
+    }
+
+    // Function to add a todo.
+    function addTodo() {
+      // Access the input elements using.getElementById() method.
+      // To get the value of the input, use the .value property.
+      const title = document.getElementById("title").value;
+      const description = document.getElementById("description").value;
+      // Add the todo to the todos array. Each todo will be given an id.
+      todos.push({
+        title: title,
+        description: description,
+        id: globalId++,
+      });
+      // Replace the old todos with the newly created ones.
+      updateTodos(todos);
+    }
+
+    // In real world applications, we receive values from a backend server.
+    // To keep the updating the todos, send request to the server every 5 seconds.
+    // The server will send the response containing the values(title, description, button and id).
+    // Get the response in json format and then access the todos array using json.todos.
+    // This todos array is then sent to updateTodos() function to show latest todos to the user.
+    window.setInterval(async function () {
+      const res = await fetch("https://sum-server.100xdevs.com/todos");
+      const json = await res.json();
+      updateTodos(json.todos);
+    }, 5000);
+  </script>
+</html>

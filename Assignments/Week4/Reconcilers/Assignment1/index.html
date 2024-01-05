@@ -1,0 +1,97 @@
+<!-- We are creating a basic Todo application. -->
+<!-- It will have 3 fields: 2 input fields for title, description and a button to add todo. -->
+<!-- User will input the values and once he clicks the button, the todo gets created and appears below. -->
+<!-- The todo formed will be a div comprising of title, description and a button to track if the todo has been done or not. -->
+
+<!-- Flow of the application: -->
+<!-- The user inputs the values and once he clicks the button, the addTodo() function gets triggered. -->
+<!-- The addTodo() reads the input values and then it will call the createTodoBody() function. -->
+<!-- The createTodoBody() injects the allTodos div having id 'showTodos' with the values given by user along with an id. -->
+<!-- The todo id helps for manipulating the todo completion. -->
+<!-- The todo showed to the user will have a button for tracking completion. Once user clicks the button, markAsDone() gets triggered. -->
+<!-- The markAsDone() grabs the todo by its id and set it as marked. -->
+<!-- The createTodoBody() function returns a div element containg the title, description and a button for the todo completion. -->
+<!-- The updateTodos() injects this div element into the allTodos div element. -->
+<!-- So, the allTodos div element will consist of multiple divs referencing to the todos added by the user. -->
+
+<!-- The problem will arise when we will need to update the todo. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Todo Application</title>
+  </head>
+  <body>
+    <div>
+      <input id="todoTitle" type="text" placeholder="Todo title" />
+      <br />
+      <br />
+      <input id="todoDesc" type="text" placeholder="Todo description" />
+      <br />
+      <br />
+      <button onclick="addTodo()">Add todo</button>
+      <br />
+      <br />
+    </div>
+    <div id="showTodos"></div>
+  </body>
+  <script>
+    // To give id to each todo formed.
+    let globalId = 1;
+
+    // Function to handle the completion of a todo.
+    function markAsDone(todoId) {
+      // Access the todo by its id using.getElementById() method.
+      const todo = document.getElementById(todoId);
+      // The todo will have 3 parts: title, description and button for tracking status.
+      // Set the button value to Done, showing that the todo has been completed.
+      todo.children[2].innerHTML = "Done!";
+    }
+
+    // Function to inject the content into the div. The values will be received as arguments.
+    function createTodoBody(title, description, id) {
+      // Create the outermost div element using .createElement() method. Each todo will be a different div element.
+      const todoDiv = document.createElement("div");
+      // Create a div element for the todo title using .createElement() method.
+      const titleDiv = document.createElement("div");
+      // Inject the title value given by the user into the div element using .innerHTML property.
+      titleDiv.innerHTML = title;
+      // Create a div element for the todo description using .createElement() method.
+      const descDiv = document.createElement("div");
+      // Inject the description value given by the user into the div element using .innerHTML property.
+      descDiv.innerHTML = description;
+      // Create a button for tracking the todo completion using .createElement() method.
+      const btnDiv = document.createElement("button");
+      // Set the button value given by the user into the div element using .innerHTML property.
+      // Initially, the todo is not completed. Once the user will click it, the todo will be marked as done.
+      btnDiv.innerHTML = "Mark as done";
+      // Give the attribute to the button for tracking the todo completion using .setAttribute() method.
+      // The tracking status will be done by the markAsDone() function using the todo id.
+      btnDiv.setAttribute("onclick", `markAsDone(${id})`);
+      // Add the title div to the main div of the todo.
+      todoDiv.appendChild(titleDiv);
+      // Add the description div to the main div of the todo.
+      todoDiv.appendChild(descDiv);
+      // Add the button to the main div of the todo.
+      todoDiv.appendChild(btnDiv);
+      // Assign the id given by the user.
+      todoDiv.setAttribute("id", id);
+      // Return the todo div element containing the title, description and the completion button.
+      return todoDiv;
+    }
+
+    // Function to add a todo.
+    function addTodo() {
+      // Access the input elements using.getElementById() method.
+      // To get the value of the input, use the .value property.
+      const title = document.getElementById("todoTitle").value;
+      const description = document.getElementById("todoDesc").value;
+      // Access the div with its id using .getElementById() method. This div will show the added todo to the user.
+      const allTodos = document.getElementById("showTodos");
+      // Show the todo to the user inside the allTodos div element. Each todo will be given an id.
+      allTodos.appendChild(createChild(title, description, globalId++));
+    }
+  </script>
+</html>
