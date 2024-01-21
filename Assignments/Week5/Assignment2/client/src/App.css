@@ -1,0 +1,332 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+input {
+  display: flex;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  border-color: #000000;
+  height: 2.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  background-color: transparent;
+}
+
+a {
+  color: rgb(203 213 225);
+}
+
+.allCardsContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.allCards {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 0.25rem;
+}
+
+@media (min-width: 1024px) {
+  .allCards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.createCardOuter {
+  display: flex;
+  justify-content: center;
+}
+
+.createCardInner {
+  display: flex;
+  align-items: center;
+}
+
+.createCard {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.createCardBtn {
+  display: inline-flex;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  align-items: center;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #000000;
+  cursor: pointer;
+}
+
+.createCardBtn:hover {
+  background-color: #007bff;
+}
+
+.cardContainer {
+  display: flex;
+  margin-top: 1.25rem;
+  margin-left: 1.25rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  width: 500px;
+  background-color: #f8f9fa;
+}
+
+.card {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  flex: 1 1 auto;
+}
+
+.name {
+  display: flex;
+  left: 0;
+  border-color: rgb(51 65 85);
+  border-bottom-width: 2px;
+  color: black;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.75rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.description {
+  display: flex;
+  left: 0;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+  color: black;
+}
+
+.interests-div {
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  align-items: flex-start;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.75rem;
+  line-height: 1.75rem;
+  color: black;
+}
+
+.interestHeading {
+  font-size: 1.5rem;
+  line-height: 3.5rem;
+}
+
+.interestsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.interestItem {
+  font-size: 1rem;
+  color: #333;
+}
+
+.profileLinks {
+  display: flex;
+  justify-content: start;
+  gap: 0.125rem;
+}
+
+.linkedinLink {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: #007bff;
+  display: inline-block;
+  margin: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: 0px;
+  cursor: pointer;
+}
+
+.linkedinLink:hover {
+  background-color: #000000;
+}
+
+.twitterLink {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: #007bff;
+  display: inline-block;
+  margin: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.twitterLink:hover {
+  background-color: #000000;
+}
+
+.addCard-div {
+  display: flex;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.addCard-align {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.addCard-box {
+  display: flex;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border-width: 2px;
+  border-color: #000000;
+  width: 600px;
+}
+
+.input-div {
+  padding: 0.5rem;
+  width: 100%;
+  background-color: #f8f9fa;
+}
+
+.addCard-heading {
+  margin-left: 0.25rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: rgb(51 65 85);
+}
+
+.addCard-info {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+  width: 100%;
+}
+
+.addCard-info::placeholder {
+  color: rgb(75 85 99);
+}
+
+.addCard-info:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width))
+    var(--tw-ring-color);
+  --tw-ring-color: rgb(0 0 0);
+  --tw-ring-offset-width: 1px;
+  box-shadow: 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color),
+    var(--tw-ring-shadow);
+}
+
+.addCard-info:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.addInterest {
+  display: inline-flex;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin: 1rem 1rem 0rem 1rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 0.5rem;
+  font-weight: 600;
+  width: 5rem;
+  color: #ffffff;
+  background-color: #000000;
+  cursor: pointer;
+}
+
+.addInterest:hover {
+  background-color: #007bff;
+}
+
+.removeInterest {
+  display: inline-flex;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 0.5rem;
+  font-weight: 600;
+  width: 5rem;
+  color: #ffffff;
+  background-color: #000000;
+  cursor: pointer;
+}
+
+.removeInterest:hover {
+  background-color: #007bff;
+}
+
+.submitBtn-div {
+  display: flex;
+  justify-content: center;
+}
+
+.submitBtn {
+  display: inline-flex;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin: 1rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.75rem;
+  width: 100%;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #000000;
+  cursor: pointer;
+}
+
+.submitBtn:hover {
+  background-color: #007bff;
+}
+
+.showCard {
+  display: flex;
+  justify-content: center;
+  border-radius: 0.5rem;
+  width: 600px;
+}
