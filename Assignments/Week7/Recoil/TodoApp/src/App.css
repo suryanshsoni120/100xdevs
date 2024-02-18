@@ -1,0 +1,27 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.card {
+  padding: 2em;
+}
+
+.userInput {
+  display: flex;
+  flex-direction: column;
+}
+
+.titleInput {
+  height: 40px;
+  text-align: center;
+  margin: 30px;
+}
+
+.descInput {
+  height: 180px;
+  text-align: left;
+  margin: 30px;
+}
