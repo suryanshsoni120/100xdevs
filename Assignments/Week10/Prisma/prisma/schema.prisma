@@ -1,0 +1,46 @@
+// This is the Prisma schema file, used to describe the data model of an application and generate the corresponding database schema.
+// It represents the data model for users and todo items, along with the necessary database configuration to connect to a PostgreSQL database.
+
+// It will generate a Prisma client with the provider set to "prisma-client-js".
+// This client will be used to interact with the database from the application code.
+generator client {
+  provider = "prisma-client-js"
+}
+
+// It defines the datasource configuration named db.
+datasource db {
+  // The application will connect to a PostgreSQL database.
+  provider = "postgresql"
+  // Read the database connection URL from an environment variable named DATABASE_URL.
+  url      = env("DATABASE_URL")
+}
+
+// Models representing entities in the application's data model.
+// They represent a table in relational databases or a collection in MongoDB.
+// The User model includes fields for id, email, firstName, lastName and password.
+model User {
+  // id is the primary key and will be automatically incremented for each new record.
+  id        Int     @id @default(autoincrement())
+  // email is unique across all records in the table.
+  email     String  @unique
+  // the user's first name and last name are marked as optional with the ? symbol, indicating that they can be null.
+  firstName String?
+  lastName  String?
+  // user's password is required.
+  password  String
+}
+
+// The Todo model includes fields for id, title, done, description, and userId.
+// Here, userId is a foreign key referencing the id field of the User model.
+model Todo {
+  // id is the primary key and will be automatically incremented for each new record.
+  id          Int     @id @default(autoincrement())
+  // todo title is required.
+  title       String
+  // check if the todo is done or not. Default value is false.
+  done        Boolean @default(false)
+  // todo description marked as optional with the ? symbol, indicating that it can be null.
+  description String?
+  // user's id is required.
+  userId      Int
+}
