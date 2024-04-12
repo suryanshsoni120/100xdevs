@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.connect("your-mongodb-url");
 
 // Create a Schema for Users
 const userSchema = new mongoose.Schema({

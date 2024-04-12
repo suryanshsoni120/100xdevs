@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.connect("your-mongodb-url");
 
 // Create a Schema for User's bank account
 const accountSchema = new mongoose.Schema({
